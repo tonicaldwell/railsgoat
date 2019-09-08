@@ -13,7 +13,8 @@ class SessionsController < ApplicationController
     begin
       # Normalize the email address, why not
       user = User.authenticate(params[:email].to_s.downcase, params[:password])
-    rescue RuntimeError => e
+    # rescue RuntimeError => e
+    rescure Exception => e
       # don't do ANYTHING
     end
 

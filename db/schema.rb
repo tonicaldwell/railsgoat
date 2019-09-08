@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20171007010129) do
 
-  create_table "analytics", force: :cascade do |t|
+  create_table "analytics", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "ip_address"
     t.string "referrer"
     t.string "user_agent"
@@ -21,19 +20,19 @@ ActiveRecord::Schema.define(version: 20171007010129) do
     t.datetime "updated_at"
   end
 
-  create_table "benefits", force: :cascade do |t|
+  create_table "benefits", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "key_managements", force: :cascade do |t|
+  create_table "key_managements", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "iv"
     t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "messages", force: :cascade do |t|
+  create_table "messages", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "creator_id"
     t.integer "receiver_id"
     t.text "message"
@@ -42,7 +41,7 @@ ActiveRecord::Schema.define(version: 20171007010129) do
     t.datetime "updated_at"
   end
 
-  create_table "paid_time_offs", force: :cascade do |t|
+  create_table "paid_time_offs", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.integer "sick_days_taken"
     t.integer "sick_days_earned"
@@ -52,7 +51,7 @@ ActiveRecord::Schema.define(version: 20171007010129) do
     t.datetime "updated_at"
   end
 
-  create_table "pays", force: :cascade do |t|
+  create_table "pays", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.string "bank_account_num"
     t.string "bank_routing_num"
@@ -61,7 +60,7 @@ ActiveRecord::Schema.define(version: 20171007010129) do
     t.datetime "updated_at"
   end
 
-  create_table "performances", force: :cascade do |t|
+  create_table "performances", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.date "date_submitted"
     t.integer "score"
@@ -71,7 +70,7 @@ ActiveRecord::Schema.define(version: 20171007010129) do
     t.datetime "updated_at"
   end
 
-  create_table "retirements", force: :cascade do |t|
+  create_table "retirements", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "total"
     t.string "employee_contrib"
     t.string "employer_contrib"
@@ -80,7 +79,7 @@ ActiveRecord::Schema.define(version: 20171007010129) do
     t.datetime "updated_at"
   end
 
-  create_table "schedules", force: :cascade do |t|
+  create_table "schedules", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "event_type"
     t.date "date_begin"
     t.date "date_end"
@@ -91,7 +90,7 @@ ActiveRecord::Schema.define(version: 20171007010129) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email"
     t.string "password"
     t.boolean "admin"
@@ -102,7 +101,7 @@ ActiveRecord::Schema.define(version: 20171007010129) do
     t.string "auth_token"
   end
 
-  create_table "work_infos", force: :cascade do |t|
+  create_table "work_infos", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.string "income"
     t.string "bonuses"
