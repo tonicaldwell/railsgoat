@@ -28,7 +28,7 @@ class User < ApplicationRecord
     build_paid_time_off(POPULATE_PAID_TIME_OFF.sample).schedule.build(POPULATE_SCHEDULE.sample)
     build_work_info(POPULATE_WORK_INFO.sample)
     # Uncomment below line to use encrypted SSN(s)
-    #work_info.build_key_management(:iv => SecureRandom.hex(32))
+    work_info.build_key_management(:iv => SecureRandom.hex(32))
     performance.build(POPULATE_PERFORMANCE.sample)
   end
 
@@ -38,24 +38,40 @@ class User < ApplicationRecord
 
   private
 
+#  def self.authenticate(email, password)
+#    auth = nil
+#    user = find_by_email(email)
+#    raise "#{email} doesn't exist!" if !(user)
+#    if user.password == Digest::MD5.hexdigest(password)
+#      auth = user
+#    else
+#      raise "Incorrect Password!"
+#    end
+#    return auth
+#  end
+
   def self.authenticate(email, password)
-    auth = nil
     user = find_by_email(email)
-    raise "#{email} doesn't exist!" if !(user)
-    if user.password == Digest::MD5.hexdigest(password)
-      auth = user
+    if user and user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+      user
     else
-      raise "Incorrect Password!"
+      raise "Invalid Credentials Supplied"
     end
-    return auth
   end
+
+#  def hash_password
+#    if will_save_change_to_password?
+#      self.password = Digest::MD5.hexdigest(self.password)
+#    end
+#  end
 
   def hash_password
-    if will_save_change_to_password?
-      self.password = Digest::MD5.hexdigest(self.password)
+    if self.password.present?
+      self.password_salt = BCrypt::Engine.generate_salt
+      self.password_hash = BCrypt::Engine.hash_secret(self.password, self.password_salt)
     end
   end
-
+  
   def generate_token(column)
     loop do
       self[column] = Encryption.encrypt_sensitive_value(self.id)

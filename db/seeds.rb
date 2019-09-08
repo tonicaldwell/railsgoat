@@ -305,7 +305,16 @@ messages.each do |message|
   Message.create!(message)
 end
 
+# work_info.each do |wi|
+#   wi[:user_id] = user_map.fetch(wi.delete(:user))
+#   WorkInfo.create!(wi)
+# end
+
 work_info.each do |wi|
-  wi[:user_id] = user_map.fetch(wi.delete(:user))
-  WorkInfo.create!(wi)
+ list = [:user_id, :SSN]
+ info = WorkInfo.new(wi.reject {|k| list.include?(k)})
+ info.user_id = wi[:user_id]
+ info.build_key_management({:user_id => wi[:user_id], :iv => SecureRandom.hex(32) })
+ info.SSN = wi[:SSN]
+ info.save
 end

@@ -2,7 +2,7 @@
 class WorkInfo < ApplicationRecord
   belongs_to :user
   has_one :key_management, foreign_key: :user_id, primary_key: :user_id, dependent: :destroy
-  #before_save :encrypt_ssn
+  before_save :encrypt_ssn
 
   # We should probably use this
   def last_four
